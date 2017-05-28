@@ -1,0 +1,95 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Spring Rest Security OAuth2",
+		"_postman_id": "289acbd2-29c4-a370-3674-471ab5f7e795",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Step 1 - unauthorized",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 401\"] = responseCode.code === 401;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/user/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Step 2 - request token",
+			"request": {
+				"url": "http://localhost:8080/oauth/token?grant_type=password&username=bill&password=abc123",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "//Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": "token will expired in 120 s"
+			},
+			"response": []
+		},
+		{
+			"name": "Step 3 - authorized by token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/user/?access_token=f54849d9-c7df-4286-95c7-5a068d9214ed",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
