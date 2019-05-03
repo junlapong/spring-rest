@@ -16,5 +16,5 @@ java -jar target/dependency/jetty-runner.jar target/*.war
 http://localhost:8080/oauth/token?grant_type=password&username=bill&password=abc123
 
 ## TODO
- - Implement with Spring Boot + Spring Secureity OAuth2
+ - Implement with Spring Boot + Spring Security OAuth2
  - [Spring Boot REST API (4) - Security with OAuth2](https://gigsterous.github.io/engineering/2017/03/01/spring-boot-4.html)
